@@ -20,7 +20,7 @@ export default function HowItWorksPage() {
                 Answer questions about your business operations and context.
               </p>
               <div className="border border-gray-200 rounded-lg p-6">
-                <h4 className="font-bold mb-3">What We'll Ask</h4>
+                <h4 className="font-bold mb-3">What We&apos;ll Ask</h4>
                 <ul className="space-y-2 text-sm text-muted-foreground text-left">
                   <li className="flex items-start">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
@@ -98,7 +98,7 @@ export default function HowItWorksPage() {
                 Our system creates all necessary documentation tailored to your needs.
               </p>
               <div className="border border-gray-200 rounded-lg p-6">
-                <h4 className="font-bold mb-3">What You'll Receive</h4>
+                <h4 className="font-bold mb-3">What You&apos;ll Receive</h4>
                 <ul className="space-y-2 text-sm text-muted-foreground text-left">
                   <li className="flex items-start">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
@@ -178,7 +178,7 @@ export default function HowItWorksPage() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                We don't just give you documents and leave you to figure it out. Our platform provides 
+                We don&apos;t just give you documents and leave you to figure it out. Our platform provides 
                 step-by-step guidance on how to implement each control, policy, and procedure.
               </p>
               <p className="text-muted-foreground">
