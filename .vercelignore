@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+
+# Development files
+.git/
+.github/
+.vscode/
+.idea/
+
+# TypeScript files that can cause issues
+types/
+
+# Tests
+__tests__/
+*.test.*
+*.spec.* 

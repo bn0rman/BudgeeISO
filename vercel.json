@@ -1,0 +1,13 @@
+{
+  "buildCommand": "next build",
+  "framework": "nextjs",
+  "devCommand": "next dev",
+  "installCommand": "npm install",
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "rewrites": []
+} 
