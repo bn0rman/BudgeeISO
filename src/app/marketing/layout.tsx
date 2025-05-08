@@ -27,13 +27,13 @@ export default async function MarketingLayout({
             </Link>
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/features" className="text-sm font-medium hover:underline">
+            <Link href="/marketing/features" className="text-sm font-medium hover:underline">
               Features
             </Link>
-            <Link href="/how-it-works" className="text-sm font-medium hover:underline">
+            <Link href="/marketing/how-it-works" className="text-sm font-medium hover:underline">
               How It Works
             </Link>
-            <Link href="/pricing" className="text-sm font-medium hover:underline">
+            <Link href="/marketing/pricing" className="text-sm font-medium hover:underline">
               Pricing
             </Link>
             {!(await isAuthenticated()) ? (
@@ -79,9 +79,9 @@ export default async function MarketingLayout({
           <div>
             <h3 className="font-bold mb-4">Product</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/features" className="text-muted-foreground hover:text-foreground">Features</Link></li>
-              <li><Link href="/pricing" className="text-muted-foreground hover:text-foreground">Pricing</Link></li>
-              <li><Link href="/how-it-works" className="text-muted-foreground hover:text-foreground">How It Works</Link></li>
+              <li><Link href="/marketing/features" className="text-muted-foreground hover:text-foreground">Features</Link></li>
+              <li><Link href="/marketing/pricing" className="text-muted-foreground hover:text-foreground">Pricing</Link></li>
+              <li><Link href="/marketing/how-it-works" className="text-muted-foreground hover:text-foreground">How It Works</Link></li>
             </ul>
           </div>
           

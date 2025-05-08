@@ -9,14 +9,34 @@ const nextConfig = {
   },
   // Ensure proper handling of route groups with parentheses
   reactStrictMode: true,
-  // Use default output for Vercel deployment
-  // output: 'export',
+  // Add output for proper deployment
+  output: 'standalone',
   // Add custom webpack configuration to handle route groups
   webpack(config) {
     return config;
   },
   // Downgrade React/Next.js version conflicts
-  transpilePackages: ['@kinde-oss/kinde-auth-nextjs']
+  transpilePackages: ['@kinde-oss/kinde-auth-nextjs'],
+  // Add redirects for old routes to new non-parenthesized routes
+  async redirects() {
+    return [
+      {
+        source: '/features',
+        destination: '/marketing/features',
+        permanent: true,
+      },
+      {
+        source: '/how-it-works',
+        destination: '/marketing/how-it-works',
+        permanent: true,
+      },
+      {
+        source: '/pricing',
+        destination: '/marketing/pricing',
+        permanent: true,
+      },
+    ];
+  }
 };
 
 module.exports = nextConfig;

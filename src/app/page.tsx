@@ -8,8 +8,8 @@ export default async function RootPage() {
     // Redirect authenticated users to dashboard
     redirect("/dashboard");
   } else {
-    // Redirect unauthenticated users to features page
-    redirect("/features");
+    // Redirect unauthenticated users to marketing features page
+    redirect("/marketing/features");
   }
   
   // This won't be reached, but is needed for TypeScript
