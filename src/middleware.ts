@@ -1,12 +1,13 @@
 import {
   withAuth,
 } from "@kinde-oss/kinde-auth-nextjs/middleware";
+import { NextRequest } from "next/server";
 
 export default withAuth(
-  async function middleware(req) {
+  async function middleware(req: NextRequest) {
   },
   {
-    publicPaths: ["/", "/api/public"],
+    publicPaths: ["/", "/api/public", "/features", "/how-it-works", "/pricing"],
   }
 );
 
