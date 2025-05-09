@@ -9,7 +9,7 @@ export default async function RootPage() {
     redirect("/dashboard");
   } else {
     // Redirect unauthenticated users to marketing features page
-    redirect("/marketing/features");
+    redirect("/marketing");
   }
   
   // This won't be reached, but is needed for TypeScript
