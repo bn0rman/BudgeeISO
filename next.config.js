@@ -3,7 +3,6 @@ const nextConfig = {
   // Enable experimental features and ensure proper route handling
   experimental: {
     // Add any needed experimental features
-    serverComponentsExternalPackages: [],
     // Workaround for client reference manifest issues
     optimizePackageImports: ['@kinde-oss/kinde-auth-nextjs'],
   },
@@ -36,7 +35,8 @@ const nextConfig = {
         permanent: true,
       },
     ];
-  }
+  },
+  serverExternalPackages: ['package-name', 'other-package']
 };
 
 module.exports = nextConfig;
