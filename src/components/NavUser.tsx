@@ -79,11 +79,11 @@ export function NavUser({ user }: NavUserProps) {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="transition-all hover:bg-gray-100 data-[state=open]:bg-gray-100 rounded-lg"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="h-9 w-9 rounded-full border-2 border-gray-200">
                 <AvatarImage src={avatarSrc} alt={displayName} referrerPolicy="no-referrer" />
-                <AvatarFallback className="rounded-lg">{getInitials()}</AvatarFallback>
+                <AvatarFallback className="bg-black text-white">{getInitials()}</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{displayName}</span>
@@ -91,20 +91,20 @@ export function NavUser({ user }: NavUserProps) {
                   {user?.email || ''}
                 </span>
               </div>
-              <MoreVerticalIcon className="ml-auto size-4" />
+              <MoreVerticalIcon className="ml-auto size-4 text-gray-500" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg border border-gray-200 shadow-lg"
             side={isMobile ? "bottom" : "right"}
             align="end"
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
+              <div className="flex items-center gap-2 px-2 py-2 text-left text-sm border-b border-gray-100">
+                <Avatar className="h-9 w-9 rounded-full border-2 border-gray-200">
                   <AvatarImage src={avatarSrc} alt={displayName} referrerPolicy="no-referrer" />
-                  <AvatarFallback className="rounded-lg">{getInitials()}</AvatarFallback>
+                  <AvatarFallback className="bg-black text-white">{getInitials()}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{displayName}</span>
@@ -114,34 +114,35 @@ export function NavUser({ user }: NavUserProps) {
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
+            <DropdownMenuGroup className="p-1">
               <Link href="/dashboard/account" passHref>
-                <DropdownMenuItem className="cursor-pointer">
-                  <UserCircleIcon className="h-4 w-4" />
+                <DropdownMenuItem className="cursor-pointer rounded-md transition-colors hover:bg-gray-100">
+                  <UserCircleIcon className="h-4 w-4 mr-2" />
                   Account
                 </DropdownMenuItem>
               </Link>
               <Link href="/dashboard/billing" passHref>
-                <DropdownMenuItem className="cursor-pointer">
-                  <CreditCardIcon className="h-4 w-4" />
+                <DropdownMenuItem className="cursor-pointer rounded-md transition-colors hover:bg-gray-100">
+                  <CreditCardIcon className="h-4 w-4 mr-2" />
                   Billing
                 </DropdownMenuItem>
               </Link>
               <Link href="/dashboard/notifications" passHref>
-                <DropdownMenuItem className="cursor-pointer">
-                  <BellIcon className="h-4 w-4" />
+                <DropdownMenuItem className="cursor-pointer rounded-md transition-colors hover:bg-gray-100">
+                  <BellIcon className="h-4 w-4 mr-2" />
                   Notifications
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <LogoutLink>
-              <DropdownMenuItem className="cursor-pointer">
-                <LogOutIcon className="h-4 w-4" />
-                Log out
-              </DropdownMenuItem>
-            </LogoutLink>
+            <div className="p-1">
+              <LogoutLink>
+                <DropdownMenuItem className="cursor-pointer rounded-md transition-colors hover:bg-red-50 hover:text-red-600">
+                  <LogOutIcon className="h-4 w-4 mr-2" />
+                  Log out
+                </DropdownMenuItem>
+              </LogoutLink>
+            </div>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
