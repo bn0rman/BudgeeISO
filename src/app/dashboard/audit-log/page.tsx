@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Card,
   CardContent,
@@ -12,20 +14,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function AuditLogPage() {
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Audit Log</h1>
+      <h1 className="text-3xl font-bold mb-6 animate-fade-in gradient-text">Audit Log</h1>
       
-      <div className="mb-6">
+      <div className="mb-6 animate-fade-in">
         <Tabs defaultValue="all" className="w-full">
-          <TabsList>
-            <TabsTrigger value="all">All Activities</TabsTrigger>
-            <TabsTrigger value="documents">Document Changes</TabsTrigger>
-            <TabsTrigger value="controls">Control Updates</TabsTrigger>
-            <TabsTrigger value="users">User Actions</TabsTrigger>
+          <TabsList className="bg-gray-100 p-1">
+            <TabsTrigger value="all" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">All Activities</TabsTrigger>
+            <TabsTrigger value="documents" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Document Changes</TabsTrigger>
+            <TabsTrigger value="controls" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Control Updates</TabsTrigger>
+            <TabsTrigger value="users" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">User Actions</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
       
-      <Card>
+      <Card className="animate-on-scroll border border-gray-200 shadow-sm hover-lift">
         <CardHeader>
           <CardTitle>Activity Log</CardTitle>
           <CardDescription>Record of compliance activities</CardDescription>
@@ -91,8 +93,8 @@ export default function AuditLogPage() {
             <Separator />
             
             <div className="flex items-start space-x-4">
-              <div className="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               </div>
@@ -148,7 +150,7 @@ export default function AuditLogPage() {
           </div>
           
           <div className="mt-6 flex justify-center">
-            <Button variant="outline">Load More</Button>
+            <Button className="btn-orange">Load More</Button>
           </div>
         </CardContent>
       </Card>

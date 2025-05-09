@@ -1,3 +1,5 @@
+'use client';
+
 import { 
   Card, 
   CardContent, 
@@ -11,9 +13,9 @@ import { Button } from "@/components/ui/button";
 export default function ControlsPage() {
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">ISO27001 Controls</h1>
+      <h1 className="text-3xl font-bold mb-6 animate-fade-in gradient-text">ISO27001 Controls</h1>
       
-      <Card className="mb-6">
+      <Card className="mb-6 animate-on-scroll">
         <CardHeader>
           <CardTitle>Controls Overview</CardTitle>
           <CardDescription>Track and manage your ISO27001 controls</CardDescription>
@@ -36,7 +38,7 @@ export default function ControlsPage() {
         </CardContent>
       </Card>
       
-      <Card>
+      <Card className="animate-on-scroll stagger-1">
         <CardHeader>
           <CardTitle>Control Categories</CardTitle>
           <CardDescription>Progress by ISO27001 Annex A</CardDescription>
@@ -48,7 +50,12 @@ export default function ControlsPage() {
                 <span className="text-sm font-medium">A.5 Information Security Policies</span>
                 <span className="text-sm font-medium">75%</span>
               </div>
-              <Progress value={75} className="h-2" />
+              <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-orange-500 rounded-full" 
+                  style={{ width: "75%" }}
+                ></div>
+              </div>
             </div>
             
             <div>
@@ -56,7 +63,12 @@ export default function ControlsPage() {
                 <span className="text-sm font-medium">A.6 Organization of Information Security</span>
                 <span className="text-sm font-medium">60%</span>
               </div>
-              <Progress value={60} className="h-2" />
+              <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-orange-500 rounded-full" 
+                  style={{ width: "60%" }}
+                ></div>
+              </div>
             </div>
             
             <div>
@@ -64,7 +76,12 @@ export default function ControlsPage() {
                 <span className="text-sm font-medium">A.7 Human Resource Security</span>
                 <span className="text-sm font-medium">45%</span>
               </div>
-              <Progress value={45} className="h-2" />
+              <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-orange-500 rounded-full" 
+                  style={{ width: "45%" }}
+                ></div>
+              </div>
             </div>
             
             <div>
@@ -72,7 +89,12 @@ export default function ControlsPage() {
                 <span className="text-sm font-medium">A.8 Asset Management</span>
                 <span className="text-sm font-medium">35%</span>
               </div>
-              <Progress value={35} className="h-2" />
+              <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-orange-500 rounded-full" 
+                  style={{ width: "35%" }}
+                ></div>
+              </div>
             </div>
             
             <div>
@@ -80,7 +102,12 @@ export default function ControlsPage() {
                 <span className="text-sm font-medium">A.9 Access Control</span>
                 <span className="text-sm font-medium">20%</span>
               </div>
-              <Progress value={20} className="h-2" />
+              <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-orange-500 rounded-full" 
+                  style={{ width: "20%" }}
+                ></div>
+              </div>
             </div>
             
             <div>
@@ -88,7 +115,12 @@ export default function ControlsPage() {
                 <span className="text-sm font-medium">A.10 Cryptography</span>
                 <span className="text-sm font-medium">15%</span>
               </div>
-              <Progress value={15} className="h-2" />
+              <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-orange-500 rounded-full" 
+                  style={{ width: "15%" }}
+                ></div>
+              </div>
             </div>
             
             <div>
@@ -96,7 +128,12 @@ export default function ControlsPage() {
                 <span className="text-sm font-medium">A.11 Physical and Environmental Security</span>
                 <span className="text-sm font-medium">40%</span>
               </div>
-              <Progress value={40} className="h-2" />
+              <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-orange-500 rounded-full" 
+                  style={{ width: "40%" }}
+                ></div>
+              </div>
             </div>
             
             <div>
@@ -104,7 +141,12 @@ export default function ControlsPage() {
                 <span className="text-sm font-medium">A.12 Operations Security</span>
                 <span className="text-sm font-medium">30%</span>
               </div>
-              <Progress value={30} className="h-2" />
+              <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-orange-500 rounded-full" 
+                  style={{ width: "30%" }}
+                ></div>
+              </div>
             </div>
             
             <div>
@@ -112,11 +154,16 @@ export default function ControlsPage() {
                 <span className="text-sm font-medium">A.13 Communications Security</span>
                 <span className="text-sm font-medium">25%</span>
               </div>
-              <Progress value={25} className="h-2" />
+              <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-orange-500 rounded-full" 
+                  style={{ width: "25%" }}
+                ></div>
+              </div>
             </div>
             
             <div className="mt-6 text-center">
-              <Button>View All Controls</Button>
+              <Button className="btn-orange">View All Controls</Button>
             </div>
           </div>
         </CardContent>
