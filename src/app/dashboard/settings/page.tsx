@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import {
   Card,
   CardContent,
@@ -11,8 +15,109 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
+import { Loader2 } from 'lucide-react';
+
+import { getUserOrganization, saveOrganizationSettings } from '@/services/organizationService';
+import { OrganizationSettings } from '@/../../types/database';
 
 export default function SettingsPage() {
+  const { user, isLoading: isUserLoading } = useKindeBrowserClient();
+  const [orgSettings, setOrgSettings] = useState<Partial<OrganizationSettings>>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Load organization settings when user is available
+  useEffect(() => {
+    async function loadSettings() {
+      if (!user?.id || isUserLoading) return;
+      
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const settings = await getUserOrganization(user.id);
+        if (settings) {
+          setOrgSettings(settings);
+        }
+      } catch (err) {
+        console.error('Error loading organization settings:', err);
+        setError('Failed to load organization settings');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    
+    loadSettings();
+  }, [user?.id, isUserLoading]);
+
+  // Update organization settings in state
+  const handleOrgSettingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    
+    setOrgSettings(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  // Save organization settings to database
+  const handleSaveOrg = async () => {
+    if (!user?.id) return;
+    
+    setIsSaving(true);
+    setSaveSuccess(false);
+    setError(null);
+    
+    try {
+      // Convert employees to number if it exists
+      const employeesNum = orgSettings.employees 
+        ? parseInt(orgSettings.employees.toString()) 
+        : undefined;
+      
+      const success = await saveOrganizationSettings({
+        user_id: user.id,
+        name: orgSettings.name,
+        industry: orgSettings.industry,
+        employees: employeesNum,
+        region: orgSettings.region
+      });
+      
+      if (success) {
+        setSaveSuccess(true);
+        
+        // Reset success message after 3 seconds
+        setTimeout(() => {
+          setSaveSuccess(false);
+        }, 3000);
+      } else {
+        setError('Failed to save organization settings');
+      }
+    } catch (err) {
+      console.error('Error saving organization settings:', err);
+      setError('Failed to save organization settings');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  // Profile data from Kinde user object
+  const profileData = {
+    firstName: user?.given_name || '',
+    lastName: user?.family_name || '',
+    email: user?.email || '',
+    picture: user?.picture || ''
+  };
+
+  if (isUserLoading) {
+    return (
+      <div className="p-6 flex items-center justify-center min-h-[300px]">
+        <Loader2 className="h-8 w-8 animate-spin text-gray-500" />
+      </div>
+    );
+  }
+
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Settings</h1>
@@ -30,59 +135,29 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Profile Settings</CardTitle>
-              <CardDescription>Manage your personal information</CardDescription>
+              <CardDescription>Your profile is managed by Kinde</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="firstName">First name</Label>
-                  <Input id="firstName" placeholder="Enter your first name" />
+                  <Input id="firstName" value={profileData.firstName} disabled />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="lastName">Last name</Label>
-                  <Input id="lastName" placeholder="Enter your last name" />
+                  <Input id="lastName" value={profileData.lastName} disabled />
                 </div>
               </div>
               
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="Enter your email" />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="jobTitle">Job Title</Label>
-                <Input id="jobTitle" placeholder="Enter your job title" />
+                <Input id="email" type="email" value={profileData.email} disabled />
               </div>
               
               <div className="pt-4">
-                <Button>Save Changes</Button>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle>Password</CardTitle>
-              <CardDescription>Update your password</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="currentPassword">Current Password</Label>
-                <Input id="currentPassword" type="password" />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="newPassword">New Password</Label>
-                <Input id="newPassword" type="password" />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                <Input id="confirmPassword" type="password" />
-              </div>
-              
-              <div className="pt-4">
-                <Button>Change Password</Button>
+                <p className="text-sm text-muted-foreground">
+                  Your profile information is managed by your authentication provider.
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -95,31 +170,82 @@ export default function SettingsPage() {
               <CardDescription>Manage your organization&apos;s information</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="orgName">Organization Name</Label>
-                <Input id="orgName" placeholder="Enter your organization name" />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="industry">Industry</Label>
-                <Input id="industry" placeholder="Enter your industry" />
-              </div>
-              
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="employees">Number of Employees</Label>
-                  <Input id="employees" placeholder="e.g. 250" />
+              {isLoading ? (
+                <div className="flex justify-center p-4">
+                  <Loader2 className="h-6 w-6 animate-spin text-gray-500" />
                 </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="region">Region</Label>
-                  <Input id="region" placeholder="e.g. North America" />
-                </div>
-              </div>
-              
-              <div className="pt-4">
-                <Button>Save Organization</Button>
-              </div>
+              ) : (
+                <>
+                  {error && (
+                    <div className="bg-red-50 text-red-600 p-3 rounded-md mb-4">
+                      {error}
+                    </div>
+                  )}
+                  
+                  {saveSuccess && (
+                    <div className="bg-green-50 text-green-600 p-3 rounded-md mb-4">
+                      Organization settings saved successfully!
+                    </div>
+                  )}
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Organization Name</Label>
+                    <Input 
+                      id="name" 
+                      placeholder="Enter your organization name" 
+                      value={orgSettings.name || ''}
+                      onChange={handleOrgSettingChange}
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="industry">Industry</Label>
+                    <Input 
+                      id="industry" 
+                      placeholder="Enter your industry" 
+                      value={orgSettings.industry || ''}
+                      onChange={handleOrgSettingChange}
+                    />
+                  </div>
+                  
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label htmlFor="employees">Number of Employees</Label>
+                      <Input 
+                        id="employees" 
+                        placeholder="e.g. 250" 
+                        type="number"
+                        value={orgSettings.employees || ''}
+                        onChange={handleOrgSettingChange}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="region">Region</Label>
+                      <Input 
+                        id="region" 
+                        placeholder="e.g. North America" 
+                        value={orgSettings.region || ''}
+                        onChange={handleOrgSettingChange}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="pt-4">
+                    <Button 
+                      onClick={handleSaveOrg} 
+                      disabled={isSaving}
+                    >
+                      {isSaving ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Saving...
+                        </>
+                      ) : 'Save Organization'}
+                    </Button>
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
           
@@ -246,12 +372,9 @@ export default function SettingsPage() {
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="font-medium">Production API Key</p>
-                      <p className="text-sm text-muted-foreground">Created on Feb 12, 2023</p>
+                      <p className="text-sm text-muted-foreground">Not generated yet</p>
                     </div>
-                    <Button variant="outline" size="sm">Regenerate</Button>
-                  </div>
-                  <div className="mt-2 bg-background p-2 rounded border">
-                    <p className="font-mono text-sm">••••••••••••••••••••••••••••••</p>
+                    <Button variant="outline" size="sm">Generate</Button>
                   </div>
                 </div>
                 
@@ -259,17 +382,43 @@ export default function SettingsPage() {
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="font-medium">Development API Key</p>
-                      <p className="text-sm text-muted-foreground">Created on Mar 5, 2023</p>
+                      <p className="text-sm text-muted-foreground">Not generated yet</p>
                     </div>
-                    <Button variant="outline" size="sm">Regenerate</Button>
-                  </div>
-                  <div className="mt-2 bg-background p-2 rounded border">
-                    <p className="font-mono text-sm">••••••••••••••••••••••••••••••</p>
+                    <Button variant="outline" size="sm">Generate</Button>
                   </div>
                 </div>
+              </div>
+              
+              <div className="mt-6">
+                <h3 className="text-lg font-medium mb-2">Available Integrations</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Connect your ISO27001 project with other tools.
+                </p>
                 
-                <div className="pt-4">
-                  <Button>Create New API Key</Button>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="border rounded-md p-4">
+                    <p className="font-medium">Slack</p>
+                    <p className="text-sm text-muted-foreground mb-3">Get notifications in your Slack channels</p>
+                    <Button variant="outline" size="sm">Connect</Button>
+                  </div>
+                  
+                  <div className="border rounded-md p-4">
+                    <p className="font-medium">Microsoft Teams</p>
+                    <p className="text-sm text-muted-foreground mb-3">Send updates to Microsoft Teams</p>
+                    <Button variant="outline" size="sm">Connect</Button>
+                  </div>
+                  
+                  <div className="border rounded-md p-4">
+                    <p className="font-medium">JIRA</p>
+                    <p className="text-sm text-muted-foreground mb-3">Create tickets from compliance tasks</p>
+                    <Button variant="outline" size="sm">Connect</Button>
+                  </div>
+                  
+                  <div className="border rounded-md p-4">
+                    <p className="font-medium">Google Workspace</p>
+                    <p className="text-sm text-muted-foreground mb-3">Sync with Google Drive documents</p>
+                    <Button variant="outline" size="sm">Connect</Button>
+                  </div>
                 </div>
               </div>
             </CardContent>

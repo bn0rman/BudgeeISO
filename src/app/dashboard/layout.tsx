@@ -2,6 +2,8 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Sidebar } from "@/components/Sidebar";
 import ScrollAnimations from "@/components/ScrollAnimations";
+import { UserDataProvider } from "@/components/providers/UserDataProvider";
+import { StableAuthProvider } from "@/components/providers/StableAuthProvider";
 
 export default async function DashboardLayout({
   children,
@@ -19,7 +21,11 @@ export default async function DashboardLayout({
       
       {/* Main content */}
       <div className="flex-1 overflow-auto bg-gradient-to-b from-gray-50 to-white">
-        <main className="animate-fade-in">{children}</main>
+        <StableAuthProvider>
+          <UserDataProvider>
+            <main className="animate-fade-in">{children}</main>
+          </UserDataProvider>
+        </StableAuthProvider>
       </div>
     </div>
   );
