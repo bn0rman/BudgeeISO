@@ -13,8 +13,5 @@
     { "source": "/features", "destination": "/marketing/features" },
     { "source": "/how-it-works", "destination": "/marketing/how-it-works" },
     { "source": "/pricing", "destination": "/marketing/pricing" }
-  ],
-  "env": {
-    "KINDE_AUTH_AUTO_REDIRECT": "false"
-  }
+  ]
 } 

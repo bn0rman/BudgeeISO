@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import ScrollAnimations from "@/components/ScrollAnimations";
 
 export default function HowItWorksPage() {
@@ -324,11 +323,11 @@ export default function HowItWorksPage() {
               Begin your ISO27001 certification journey with our simple four-step process
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <LoginLink>
-                <Button size="lg" className="btn-orange h-12 px-8 text-base transition-all hover:scale-105">
+              <Button variant="outline" size="lg" className="h-12 px-8 text-base transition-all hover:scale-105" asChild>
+                <Link href="/auth/signin">
                   Start Your ISO Journey
-                </Button>
-              </LoginLink>
+                </Link>
+              </Button>
               <Button variant="outline" size="lg" className="h-12 px-8 text-base transition-all hover:scale-105" asChild>
                 <Link href="/marketing/pricing">
                   View Pricing
