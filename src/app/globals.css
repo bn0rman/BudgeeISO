@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
-    --primary: 0 0% 9%;
+    --primary: 30 100% 50%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 96.1%;
@@ -22,20 +22,20 @@
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
 
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 30 100% 95%;
+    --accent-foreground: 30 100% 30%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --ring: 30 100% 50%;
 
     --radius: 0.5rem;
 
     /* Chart colors */
-    --chart-1: 12 76% 61%;
+    --chart-1: 30 100% 50%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
@@ -44,8 +44,8 @@
     /* Custom Variables */
     --g-color-black: #000;
     --g-color-white: #fff;
-    --g-color-orange: #FF5500;
-    --g-color-orange-light: #FF7733;
+    --g-color-orange: #FF8000;
+    --g-color-orange-light: #FF9933;
 
     --g-color-grey-100: #f1f2f4;
     --g-color-grey-200: #e9eaec;
@@ -91,39 +91,51 @@
   }
 
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 220 10% 10%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 3.9%;
+    --card: 220 10% 12%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 3.9%;
+    --popover: 220 10% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 30 100% 55%;
+    --primary-foreground: 0 0% 10%;
 
-    --secondary: 0 0% 14.9%;
+    --secondary: 220 10% 20%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 14.9%;
+    --muted: 220 10% 20%;
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 30 100% 20%;
+    --accent-foreground: 30 100% 80%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62.8% 40.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --border: 220 10% 20%;
+    --input: 220 10% 20%;
+    --ring: 30 100% 55%;
     
-    --chart-1: 220 70% 50%;
+    --chart-1: 30 100% 55%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    
+    --g-color-orange: #FF9933;
+    --g-color-orange-light: #FFAA66;
+    
+    --g-color-grey-100: #2a2d35;
+    --g-color-grey-200: #353841;
+    --g-color-grey-300: #454954;
+    --g-color-grey-400: #62656e;
+    --g-color-grey-500: #7d8188;
+    --g-color-grey-600: #a1a3a9;
+    --g-color-grey-700: #c4c6ca;
+    --g-color-grey-900: #f1f2f4;
   }
 }
 
@@ -521,12 +533,13 @@ a {
   .btn-orange {
     background-color: var(--g-color-orange);
     color: var(--g-color-white);
+    font-weight: var(--g-font-weight-bold);
     transition: all 0.2s ease-in-out;
   }
 
   .btn-orange:hover {
     background-color: var(--g-color-orange-light);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 
   .card-hover {

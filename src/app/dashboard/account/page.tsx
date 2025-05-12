@@ -1,4 +1,4 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getUser } from "@/lib/supabase-server";
 import { 
   Card, 
   CardContent, 
@@ -13,8 +13,8 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 
 export default async function AccountPage() {
-  const { getUser } = getKindeServerSession();
   const user = await getUser();
+  const userData = user?.user_metadata || {};
 
   return (
     <div className="p-6">
@@ -33,12 +33,12 @@ export default async function AccountPage() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="first-name">First Name</Label>
-                <Input id="first-name" defaultValue={user?.given_name || ''} />
+                <Label htmlFor="name">Full Name</Label>
+                <Input id="name" defaultValue={userData.name || ''} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="last-name">Last Name</Label>
-                <Input id="last-name" defaultValue={user?.family_name || ''} />
+                <Label htmlFor="phone">Phone</Label>
+                <Input id="phone" defaultValue={userData.phone || ''} />
               </div>
             </div>
             <div className="space-y-2">

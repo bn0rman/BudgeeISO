@@ -53,19 +53,19 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-3">
-            <Button className="transition-all bg-black hover:bg-gray-900 flex items-center gap-2">
+            <Button className="transition-all bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2">
               <UploadCloud className="h-4 w-4" />
               Upload Document
             </Button>
-            <Button className="transition-all bg-black hover:bg-gray-900 flex items-center gap-2">
+            <Button className="transition-all bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2">
               <CalendarClock className="h-4 w-4" />
               Schedule Meeting
             </Button>
-            <Button className="transition-all bg-black hover:bg-gray-900 flex items-center gap-2">
+            <Button className="transition-all bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2">
               <SearchCheck className="h-4 w-4" />
               Run Gap Analysis
             </Button>
-            <Button className="transition-all bg-black hover:bg-gray-900 flex items-center gap-2">
+            <Button className="transition-all bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2">
               <FileText className="h-4 w-4" />
               View ISO Requirements
             </Button>
@@ -141,10 +141,10 @@ export default function Dashboard() {
         <div className="animate-on-scroll">
           <Tabs defaultValue="controls" className="w-full">
             <TabsList className="bg-gray-100 p-1 mb-6">
-              <TabsTrigger value="controls" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Controls</TabsTrigger>
-              <TabsTrigger value="documents" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Documents</TabsTrigger>
-              <TabsTrigger value="audit-log" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Audit Log</TabsTrigger>
-              <TabsTrigger value="timeline" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Timeline</TabsTrigger>
+              <TabsTrigger value="controls" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Controls</TabsTrigger>
+              <TabsTrigger value="documents" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Documents</TabsTrigger>
+              <TabsTrigger value="audit-log" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Audit Log</TabsTrigger>
+              <TabsTrigger value="timeline" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Timeline</TabsTrigger>
             </TabsList>
             <TabsContent value="controls" className="space-y-4">
               <Card className="border border-gray-200 shadow-sm">
@@ -359,7 +359,7 @@ export default function Dashboard() {
                   <div className="space-y-0">
                     <div className="relative pl-8 pb-8 pt-2">
                       <div className="absolute left-0 top-2 h-full w-px bg-gray-200"></div>
-                      <div className="absolute left-0 top-2 h-4 w-4 rounded-full bg-black -ml-2"></div>
+                      <div className="absolute left-0 top-2 h-4 w-4 rounded-full bg-primary -ml-2"></div>
                       <div>
                         <h4 className="text-sm font-bold">Project Kickoff</h4>
                         <p className="text-xs text-muted-foreground">April 15, 2023</p>
@@ -369,7 +369,7 @@ export default function Dashboard() {
                     
                     <div className="relative pl-8 pb-8 pt-2">
                       <div className="absolute left-0 top-2 h-full w-px bg-gray-200"></div>
-                      <div className="absolute left-0 top-2 h-4 w-4 rounded-full bg-black -ml-2"></div>
+                      <div className="absolute left-0 top-2 h-4 w-4 rounded-full bg-primary -ml-2"></div>
                       <div>
                         <h4 className="text-sm font-bold">Gap Analysis Complete</h4>
                         <p className="text-xs text-muted-foreground">May 20, 2023</p>
@@ -379,7 +379,7 @@ export default function Dashboard() {
                     
                     <div className="relative pl-8 pb-8 pt-2">
                       <div className="absolute left-0 top-2 h-full w-px bg-gray-200"></div>
-                      <div className="absolute left-0 top-2 h-4 w-4 rounded-full bg-black -ml-2"></div>
+                      <div className="absolute left-0 top-2 h-4 w-4 rounded-full bg-primary -ml-2"></div>
                       <div>
                         <h4 className="text-sm font-bold">Documentation Phase</h4>
                         <p className="text-xs text-muted-foreground">Current Phase</p>

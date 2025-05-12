@@ -1,7 +1,7 @@
 "use client"
 
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   BellIcon,
   CreditCardIcon,
@@ -30,46 +30,64 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { signOutClient } from "@/lib/supabase-client";
 
+// Type for Supabase User
 type User = {
   id?: string;
-  given_name?: string | null;
-  family_name?: string | null;
   email?: string | null;
-  picture?: string | null;
-  name?: string | null;
-  avatar?: string | null;
+  user_metadata?: {
+    name?: string | null;
+    avatar_url?: string | null;
+    full_name?: string | null;
+  } | null;
 }
 
-type NavUserProps = {
-  user: User | null | undefined;
+interface NavUserProps {
+  user: User | null;
 }
 
 export function NavUser({ user }: NavUserProps) {
   const { isMobile } = useSidebar()
+  const router = useRouter();
   
   // Format the user's name from different possible sources
-  const displayName = user?.name || 
-    (user?.given_name && user?.family_name 
-      ? `${user.given_name} ${user.family_name}` 
-      : 'User');
+  const displayName = user?.user_metadata?.name || 
+    user?.user_metadata?.full_name || 
+    user?.email?.split('@')[0] || 
+    'User';
   
-  // Get avatar from different possible sources
-  const avatarSrc = user?.avatar || user?.picture || '';
+  // Get avatar from metadata
+  const avatarSrc = user?.user_metadata?.avatar_url || '';
   
   // Create initials for the avatar fallback
   const getInitials = () => {
-    if (user?.given_name && user?.family_name) {
-      return `${user.given_name[0]}${user.family_name[0]}`;
-    }
-    if (user?.name) {
-      const nameParts = user.name.split(' ');
+    if (user?.user_metadata?.name) {
+      const nameParts = user.user_metadata.name.split(' ');
       if (nameParts.length >= 2) {
         return `${nameParts[0][0]}${nameParts[1][0]}`;
       }
-      return user.name[0];
+      return user.user_metadata.name[0];
+    }
+    if (user?.email) {
+      return user.email[0].toUpperCase();
     }
     return 'U';
+  };
+
+  // Handle logout
+  const handleLogout = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      // Use our enhanced signout function
+      await signOutClient();
+      
+      // Redirect to home with signout parameter
+      window.location.href = '/?signout=true';
+    } catch (error) {
+      console.error('Error signing out:', error);
+      router.push('/');
+    }
   };
 
   return (
@@ -136,12 +154,13 @@ export function NavUser({ user }: NavUserProps) {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <div className="p-1">
-              <LogoutLink>
-                <DropdownMenuItem className="cursor-pointer rounded-md transition-colors hover:bg-red-50 hover:text-red-600">
-                  <LogOutIcon className="h-4 w-4 mr-2" />
-                  Log out
-                </DropdownMenuItem>
-              </LogoutLink>
+              <DropdownMenuItem 
+                onClick={handleLogout}
+                className="cursor-pointer rounded-md transition-colors hover:bg-red-50 hover:text-red-600"
+              >
+                <LogOutIcon className="h-4 w-4 mr-2" />
+                Log out
+              </DropdownMenuItem>
             </div>
           </DropdownMenuContent>
         </DropdownMenu>

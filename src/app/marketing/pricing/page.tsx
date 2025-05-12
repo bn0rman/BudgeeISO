@@ -58,13 +58,13 @@ export default function PricingPage() {
               </CardContent>
               <CardFooter>
                 <LoginLink className="w-full">
-                  <Button className="w-full">Get Started</Button>
+                  <Button variant="outline" className="w-full">Get Started</Button>
                 </LoginLink>
               </CardFooter>
             </Card>
             
-            <Card className="border-2 border-black relative mt-[-1rem] md:mt-[-2rem] shadow-lg">
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white px-4 py-1 rounded-full text-sm font-bold">
+            <Card className="border-2 border-primary relative mt-[-1rem] md:mt-[-2rem] shadow-lg">
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-bold">
                 Most Popular
               </div>
               <CardHeader>
@@ -117,7 +117,7 @@ export default function PricingPage() {
               </CardContent>
               <CardFooter>
                 <LoginLink className="w-full">
-                  <Button className="w-full bg-black hover:bg-gray-800">Get Started</Button>
+                  <Button className="w-full">Get Started</Button>
                 </LoginLink>
               </CardFooter>
             </Card>

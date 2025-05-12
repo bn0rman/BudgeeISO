@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import { 
   ArrowRight, 
@@ -36,11 +35,11 @@ export default function Home() {
               business, and get ready for certification faster than ever before.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-4 animate-slide-up stagger-2">
-              <LoginLink>
-                <Button size="lg" className="btn-orange h-12 px-8 text-base transition-all hover:scale-105">
+              <Button size="lg" className="btn-orange h-12 px-8 text-base transition-all hover:scale-105" asChild>
+                <Link href="/auth/signin">
                   Start Your ISO Journey
-                </Button>
-              </LoginLink>
+                </Link>
+              </Button>
               <Button variant="outline" size="lg" className="h-12 px-8 text-base transition-all hover:scale-105" asChild>
                 <Link href="/marketing/how-it-works">
                   See How It Works
@@ -346,11 +345,11 @@ export default function Home() {
               <p className="text-gray-300 mb-8">
                 Get started today and see how Budgee ISO can streamline your certification process.
               </p>
-              <LoginLink>
-                <Button size="lg" className="btn-orange h-12 px-8 text-base transition-all hover:scale-105">
+              <Button size="lg" className="btn-orange h-12 px-8 text-base transition-all hover:scale-105" asChild>
+                <Link href="/auth/signin">
                   Start Your Free Trial
-                </Button>
-              </LoginLink>
+                </Link>
+              </Button>
             </div>
             <div className="flex flex-wrap gap-8 justify-center">
               <div className="flex flex-col items-center animate-on-scroll">

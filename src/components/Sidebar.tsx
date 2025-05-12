@@ -33,8 +33,8 @@ export function Sidebar({ user }: SidebarProps) {
 
   return (
     /* Sidebar */
-    <div className="w-64 bg-white shadow-lg border-r border-gray-100 flex flex-col h-full">
-      <div className="p-6 border-b border-gray-100">
+    <div className="w-64 bg-card shadow-lg border-r border-gray-100 flex flex-col h-full">
+      <div className="p-6 border-b border-gray-100 flex items-center justify-between">
         <Link href="/" className="flex items-center transition-transform hover:scale-105">
           <h1 className="text-xl font-bold gradient-text">Budgee ISO</h1>
         </Link>
@@ -46,8 +46,8 @@ export function Sidebar({ user }: SidebarProps) {
             href="/dashboard" 
             className={`flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-all ${
               isActive('/dashboard') 
-                ? 'bg-black text-white hover:bg-gray-900' 
-                : 'text-gray-700 hover:bg-gray-100 hover:text-black'
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                : 'text-foreground hover:bg-muted hover:text-foreground'
             }`}
           >
             <LayoutDashboard className="h-5 w-5 mr-3" />
@@ -58,8 +58,8 @@ export function Sidebar({ user }: SidebarProps) {
             href="/dashboard/controls" 
             className={`flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-all ${
               isActive('/dashboard/controls') 
-                ? 'bg-black text-white hover:bg-gray-900' 
-                : 'text-gray-700 hover:bg-gray-100 hover:text-black'
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                : 'text-foreground hover:bg-muted hover:text-foreground'
             }`}
           >
             <ShieldCheck className="h-5 w-5 mr-3" />
@@ -70,8 +70,8 @@ export function Sidebar({ user }: SidebarProps) {
             href="/dashboard/documents" 
             className={`flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-all ${
               isActive('/dashboard/documents') 
-                ? 'bg-black text-white hover:bg-gray-900' 
-                : 'text-gray-700 hover:bg-gray-100 hover:text-black'
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                : 'text-foreground hover:bg-muted hover:text-foreground'
             }`}
           >
             <FileText className="h-5 w-5 mr-3" />
@@ -82,8 +82,8 @@ export function Sidebar({ user }: SidebarProps) {
             href="/dashboard/audit-log" 
             className={`flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-all ${
               isActive('/dashboard/audit-log') 
-                ? 'bg-black text-white hover:bg-gray-900' 
-                : 'text-gray-700 hover:bg-gray-100 hover:text-black'
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                : 'text-foreground hover:bg-muted hover:text-foreground'
             }`}
           >
             <ClipboardList className="h-5 w-5 mr-3" />
@@ -94,8 +94,8 @@ export function Sidebar({ user }: SidebarProps) {
             href="/dashboard/settings" 
             className={`flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-all ${
               isActive('/dashboard/settings') 
-                ? 'bg-black text-white hover:bg-gray-900' 
-                : 'text-gray-700 hover:bg-gray-100 hover:text-black'
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                : 'text-foreground hover:bg-muted hover:text-foreground'
             }`}
           >
             <Settings className="h-5 w-5 mr-3" />

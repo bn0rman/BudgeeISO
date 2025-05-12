@@ -19,10 +19,10 @@ export default function AuditLogPage() {
       <div className="mb-6 animate-fade-in">
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="bg-gray-100 p-1">
-            <TabsTrigger value="all" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">All Activities</TabsTrigger>
-            <TabsTrigger value="documents" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Document Changes</TabsTrigger>
-            <TabsTrigger value="controls" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Control Updates</TabsTrigger>
-            <TabsTrigger value="users" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">User Actions</TabsTrigger>
+            <TabsTrigger value="all" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">All Activities</TabsTrigger>
+            <TabsTrigger value="documents" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Document Changes</TabsTrigger>
+            <TabsTrigger value="controls" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Control Updates</TabsTrigger>
+            <TabsTrigger value="users" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">User Actions</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>

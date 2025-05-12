@@ -4,7 +4,7 @@ const nextConfig = {
   experimental: {
     // Add any needed experimental features
     // Workaround for client reference manifest issues
-    optimizePackageImports: ['@kinde-oss/kinde-auth-nextjs'],
+    optimizePackageImports: ['@supabase/ssr', '@supabase/supabase-js'],
   },
   // Ensure proper handling of route groups with parentheses
   reactStrictMode: true,
@@ -14,8 +14,8 @@ const nextConfig = {
   webpack(config) {
     return config;
   },
-  // Downgrade React/Next.js version conflicts
-  transpilePackages: ['@kinde-oss/kinde-auth-nextjs'],
+  // Transpile packages for compatibility
+  transpilePackages: ['@supabase/ssr', '@supabase/supabase-js'],
   // Add redirects for old routes to new non-parenthesized routes
   async redirects() {
     return [

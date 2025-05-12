@@ -23,10 +23,10 @@ export default function DocumentsPage() {
       <div className="animate-on-scroll">
         <Tabs defaultValue="required" className="w-full">
           <TabsList className="bg-gray-100 p-1 mb-6">
-            <TabsTrigger value="required" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Required Documents</TabsTrigger>
-            <TabsTrigger value="policies" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Policies</TabsTrigger>
-            <TabsTrigger value="procedures" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Procedures</TabsTrigger>
-            <TabsTrigger value="records" className="transition-all data-[state=active]:bg-black data-[state=active]:text-white">Records</TabsTrigger>
+            <TabsTrigger value="required" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Required Documents</TabsTrigger>
+            <TabsTrigger value="policies" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Policies</TabsTrigger>
+            <TabsTrigger value="procedures" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Procedures</TabsTrigger>
+            <TabsTrigger value="records" className="transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Records</TabsTrigger>
           </TabsList>
 
           <TabsContent value="required" className="space-y-4 mt-6">
