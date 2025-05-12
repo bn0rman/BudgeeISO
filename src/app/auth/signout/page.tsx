@@ -1,42 +1,29 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { signOutClient } from '@/lib/supabase-client';
 
 export default function SignOutPage() {
-  const router = useRouter();
-
   useEffect(() => {
-    const performSignOut = async () => {
+    async function signOut() {
       try {
+        // Use the enhanced signout function
         await signOutClient();
-        if (typeof window !== 'undefined') {
-          window.location.href = '/?signout=true';
-        } else {
-          router.push('/?signout=true');
-        }
+        
+        // Force hard reload to clear any in-memory state
+        window.location.href = '/?signout=true';
       } catch (error) {
         console.error('Error signing out:', error);
-        if (typeof window !== 'undefined') {
-          window.location.href = '/';
-        } else {
-          router.push('/');
-        }
+        window.location.href = '/';
       }
-    };
-
-    performSignOut();
-  }, [router]);
+    }
+    
+    signOut();
+  }, []);
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-6 text-center">
-        <h1 className="text-2xl font-bold">Signing out...</h1>
-        <p className="text-muted-foreground">
-          You&apos;re being signed out of your account.
-        </p>
-      </div>
+    <div className="flex min-h-screen flex-col items-center justify-center">
+      <h2 className="text-xl">Signing out...</h2>
     </div>
   );
 } 

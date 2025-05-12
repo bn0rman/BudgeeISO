@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
@@ -15,13 +15,6 @@ export function SignUpForm() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [redirectUrl, setRedirectUrl] = useState('');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setRedirectUrl(`${window.location.origin}/auth/callback`);
-    }
-  }, []);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +26,7 @@ export function SignUpForm() {
         email,
         password,
         options: {
-          emailRedirectTo: redirectUrl,
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       });
       

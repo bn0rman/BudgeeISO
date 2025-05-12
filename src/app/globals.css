@@ -517,7 +517,7 @@ a {
   }
 }
 
-/* Additional modern utility classes for the design */
+/* Additional modern utility classes for the Kinde-inspired design */
 @layer components {
   .gradient-text {
     background: linear-gradient(90deg, var(--g-color-black) 0%, #4d4d4d 100%);

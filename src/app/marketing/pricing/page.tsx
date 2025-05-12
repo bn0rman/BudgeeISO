@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
-import Link from "next/link";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
 
 export default function PricingPage() {
@@ -57,9 +57,9 @@ export default function PricingPage() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Link href="/auth/signin" className="w-full">
+                <LoginLink className="w-full">
                   <Button variant="outline" className="w-full">Get Started</Button>
-                </Link>
+                </LoginLink>
               </CardFooter>
             </Card>
             
@@ -116,9 +116,9 @@ export default function PricingPage() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Link href="/auth/signin" className="w-full">
+                <LoginLink className="w-full">
                   <Button className="w-full">Get Started</Button>
-                </Link>
+                </LoginLink>
               </CardFooter>
             </Card>
             
@@ -172,9 +172,9 @@ export default function PricingPage() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Link href="/auth/signin" className="w-full">
+                <LoginLink className="w-full">
                   <Button variant="outline" className="w-full">Contact Sales</Button>
-                </Link>
+                </LoginLink>
               </CardFooter>
             </Card>
           </div>

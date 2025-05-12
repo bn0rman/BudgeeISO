@@ -56,13 +56,9 @@ export function SignInForm() {
       // We need to refresh the client-side session after server-side auth
       await supabase.auth.getSession();
       
-      // Navigate using router after a short delay to ensure session is updated
+      // Force refresh with a direct navigation
       setTimeout(() => {
-        if (typeof window !== 'undefined') {
-          window.location.href = "/dashboard";
-        } else {
-          router.push("/dashboard");
-        }
+        window.location.href = "/dashboard";
       }, 500);
     } catch (err: any) {
       console.error("Sign in error:", err);

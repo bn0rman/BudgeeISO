@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabase';
-import { useState, useEffect } from 'react';
 
 interface AuthButtonsProps {
   view: 'signin' | 'signup';
@@ -11,19 +10,12 @@ interface AuthButtonsProps {
 
 export function AuthButtons({ view }: AuthButtonsProps) {
   const router = useRouter();
-  const [redirectUrl, setRedirectUrl] = useState('');
-  
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setRedirectUrl(`${window.location.origin}/auth/callback`);
-    }
-  }, []);
 
   const handleGoogleSignIn = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: redirectUrl,
+        redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
   };
@@ -32,7 +24,7 @@ export function AuthButtons({ view }: AuthButtonsProps) {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: redirectUrl,
+        redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
   };
