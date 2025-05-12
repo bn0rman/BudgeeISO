@@ -1,10 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { supabase } from '@/lib/supabase';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the Auth component
+const Auth = dynamic(
+  () => import('@supabase/auth-ui-react').then((mod) => mod.Auth),
+  { ssr: false }
+);
 
 type AuthFormProps = {
   view?: 'sign_in' | 'sign_up' | 'magic_link' | 'forgotten_password';
@@ -13,6 +19,16 @@ type AuthFormProps = {
 export function AuthForm({ view = 'sign_in' }: AuthFormProps) {
   const router = useRouter();
   const [authView, setAuthView] = useState(view);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Ensure component is fully mounted before rendering Auth
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  if (!isLoaded) {
+    return <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">Loading...</div>;
+  }
 
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
@@ -31,7 +47,7 @@ export function AuthForm({ view = 'sign_in' }: AuthFormProps) {
         showLinks={true}
         providers={['google', 'github']}
         redirectTo={`${window.location.origin}/auth/callback`}
-        onViewChange={(newView) => setAuthView(newView as any)}
+        onViewChange={(newView: any) => setAuthView(newView)}
       />
     </div>
   );
