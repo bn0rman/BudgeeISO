@@ -53,28 +53,26 @@ export function ThemeProvider({
     
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [defaultTheme, storageKey]);
+  }, [defaultTheme, storageKey, theme]);
 
-  const value = {
+  const value = React.useMemo(() => ({
     theme,
     setTheme: (newTheme: Theme) => {
       setTheme(newTheme);
-      localStorage.setItem(storageKey, newTheme);
-      
-      if (newTheme === "system") {
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        document.documentElement.classList.toggle("dark", systemTheme === "dark");
-      } else {
-        document.documentElement.classList.toggle("dark", newTheme === "dark");
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(storageKey, newTheme);
+        
+        if (newTheme === "system") {
+          const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.classList.toggle("dark", systemTheme === "dark");
+        } else {
+          document.documentElement.classList.toggle("dark", newTheme === "dark");
+        }
       }
     }
-  };
+  }), [theme, storageKey]);
 
   // Avoid hydration mismatch by not rendering anything until mounted
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
   return (
     <ThemeContext.Provider value={value} {...props}>
       {children}

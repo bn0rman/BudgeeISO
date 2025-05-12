@@ -83,7 +83,11 @@ export function NavUser({ user }: NavUserProps) {
       await signOutClient();
       
       // Redirect to home with signout parameter
-      window.location.href = '/?signout=true';
+      if (typeof window !== 'undefined') {
+        window.location.href = '/?signout=true';
+      } else {
+        router.push('/?signout=true');
+      }
     } catch (error) {
       console.error('Error signing out:', error);
       router.push('/');

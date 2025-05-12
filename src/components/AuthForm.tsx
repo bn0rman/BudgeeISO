@@ -20,10 +20,12 @@ export function AuthForm({ view = 'sign_in' }: AuthFormProps) {
   const router = useRouter();
   const [authView, setAuthView] = useState(view);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [redirectUrl, setRedirectUrl] = useState('');
 
   // Ensure component is fully mounted before rendering Auth
   useEffect(() => {
     setIsLoaded(true);
+    setRedirectUrl(`${window.location.origin}/auth/callback`);
   }, []);
 
   if (!isLoaded) {
@@ -46,7 +48,7 @@ export function AuthForm({ view = 'sign_in' }: AuthFormProps) {
         theme="light"
         showLinks={true}
         providers={['google', 'github']}
-        redirectTo={`${window.location.origin}/auth/callback`}
+        redirectTo={redirectUrl}
         onViewChange={(newView: any) => setAuthView(newView)}
       />
     </div>
